@@ -1,6 +1,6 @@
 # Standalone deployment
 
-[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://deploy.azure.com/?ptmpl=/Source/Tailwind.Traders.Web/Standalone/azuredeploy.json)
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://deploy.azure.com/?ptmpl=Source/Tailwind.Traders.Web/Standalone/azuredeploy.json)
 
 This app can be deployed in standalone mode that uses its own databases, rather than calling out to backend microservices hosted elsewhere.
 
