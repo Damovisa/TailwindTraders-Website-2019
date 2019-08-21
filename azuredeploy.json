@@ -5,6 +5,10 @@
     "siteName": {
       "type": "string"
     },
+    "location": {
+      "type": "string",
+      "defaultValue": "centralus"
+    },
     "deploymentMode": {
       "type": "string",
       "allowedValues": [
@@ -31,7 +35,6 @@
   },
   "variables": {
     "subscriptionId": "[subscription().id]",
-    "location": "[resourceGroup().location]",
     "hostingEnvironment": "",
     "hostingPlanName": "[concat(parameters('siteName'), '-plan')]",
     "serverFarmResourceGroup": "[resourceGroup().name]",
@@ -55,7 +58,7 @@
     "autoPauseDelay": "",
     "sqlSkuName": "Basic",
     "sqlTier": "Basic",
-    "locationCode": "[toLower(replace(variables('location'), ' ', ''))]",
+    "locationCode": "[toLower(replace(parameters('location'), ' ', ''))]",
     "allowAzureIps": true,
     "apiUrl": "[if(equals(parameters('deploymentMode'), 'standalone'), '/api/v1', 'https://f5dc03f4e99349f6b467.eastus.aksapp.io/webbff/v1')]",
     "apiUrlShoppingCart": "[if(equals(parameters('deploymentMode'), 'standalone'), '/api/v1', 'https://f5dc03f4e99349f6b467.eastus.aksapp.io/cart-api')]",
@@ -67,7 +70,7 @@
       "apiVersion": "2018-02-01",
       "name": "[parameters('siteName')]",
       "type": "Microsoft.Web/sites",
-      "location": "[variables('location')]",
+      "location": "[parameters('location')]",
       "tags": {},
       "dependsOn": [
         "microsoft.insights/components/test-test-tailwind",
@@ -168,7 +171,7 @@
       "apiVersion": "2018-02-01",
       "name": "[variables('hostingPlanName')]",
       "type": "Microsoft.Web/serverfarms",
-      "location": "[variables('location')]",
+      "location": "[parameters('location')]",
       "kind": "",
       "tags": {},
       "dependsOn": [],
@@ -255,7 +258,7 @@
 			"type": "Microsoft.DocumentDB/databaseAccounts",
 			"name": "[variables('cosmosAccountName')]",
 			"apiVersion": "2016-03-31",
-			"location": "[variables('location')]",
+			"location": "[parameters('location')]",
 			"kind": "MongoDB",
 			"properties": {
 				"databaseAccountOfferType": "Standard"
