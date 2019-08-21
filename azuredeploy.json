@@ -2,7 +2,7 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "siteName": {
+    "sitexName": {
       "type": "string"
     },
     "siteLocation": {
@@ -34,10 +34,11 @@
     }
   },
   "variables": {
+    "name": "[toLower(parameters('sitexName'))]",
     "subscriptionId": "[subscription().id]",
     "location": "[parameters('siteLocation')]",
     "hostingEnvironment": "",
-    "hostingPlanName": "[concat(parameters('siteName'), '-plan')]",
+    "hostingPlanName": "[concat(variables('name'), '-plan')]",
     "serverFarmResourceGroup": "[resourceGroup().name]",
     "alwaysOn": true,
     "sku": "PremiumV2",
@@ -46,8 +47,8 @@
     "workerSizeId": "3",
     "numberOfWorkers": "1",
     "currentStack": "dotnetcore",
-    "sqlServerName": "[concat(parameters('siteName'), '-sqlsvr')]",
-    "sqlDatabaseName": "[concat(parameters('siteName'), '-sqldb')]",
+    "sqlServerName": "[concat(variables('name'), '-sqlsvr')]",
+    "sqlDatabaseName": "[concat(variables('name'), '-sqldb')]",
     "collation": "SQL_Latin1_General_CP1_CI_AS",
     "maxSizeBytes": 2147483648,
     "sampleName": "",
@@ -63,13 +64,13 @@
     "allowAzureIps": true,
     "apiUrl": "[if(equals(parameters('deploymentMode'), 'standalone'), '/api/v1', 'https://f5dc03f4e99349f6b467.eastus.aksapp.io/webbff/v1')]",
     "apiUrlShoppingCart": "[if(equals(parameters('deploymentMode'), 'standalone'), '/api/v1', 'https://f5dc03f4e99349f6b467.eastus.aksapp.io/cart-api')]",
-    "cosmosAccountName": "[concat(parameters('siteName'), '-mongo')]",
+    "cosmosAccountName": "[concat(variables('name'), '-mongo')]",
     "cosmosDatabaseName": "tailwind"
   },
   "resources": [
     {
       "apiVersion": "2018-02-01",
-      "name": "[parameters('siteName')]",
+      "name": "[variables('name')]",
       "type": "Microsoft.Web/sites",
       "location": "[variables('location')]",
       "tags": {},
@@ -80,7 +81,7 @@
         "[concat('Microsoft.DocumentDB/databaseAccounts/', variables('cosmosAccountName'))]"
       ],
       "properties": {
-        "name": "[parameters('siteName')]",
+        "name": "[variables('name')]",
         "siteConfig": {
           "appSettings": [
             {
@@ -158,7 +159,7 @@
           "name": "web",
           "type": "sourcecontrols",
           "dependsOn": [
-            "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
+            "[resourceId('Microsoft.Web/Sites', variables('name'))]"
           ],
           "properties": {
             "RepoUrl": "[parameters('repoURL')]",
@@ -195,7 +196,7 @@
       "location": "[variables('locationCode')]",
       "tags": null,
       "properties": {
-        "ApplicationId": "[parameters('siteName')]",
+        "ApplicationId": "[variables('name')]",
         "Request_Source": "IbizaWebAppExtensionCreate"
       }
     },
