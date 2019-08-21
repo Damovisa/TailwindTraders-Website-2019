@@ -34,7 +34,7 @@
     }
   },
   "variables": {
-    "name": "[toLower(parameters('siteName'))]",
+    "name": "[toLower(replace(parameters('siteName'), '_', ''))]",
     "subscriptionId": "[subscription().id]",
     "location": "[parameters('siteLocation')]",
     "hostingEnvironment": "",
@@ -275,8 +275,7 @@
 			"properties":{
 				"resource":{
 					"id": "[variables('cosmosDatabaseName')]"
-				},
-				"options": { "throughput": "400" }
+				}
 			}
 		},
 		{
@@ -290,7 +289,8 @@
 				"resource":{
 					"id":  "cart",
 					"shardKey": { "email": "Hash" }
-				}
+				},
+				"options": { "throughput": "400" }
 			}
 		}
   ]
