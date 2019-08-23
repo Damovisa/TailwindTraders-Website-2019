@@ -47,6 +47,7 @@
     "workerSizeId": "3",
     "numberOfWorkers": "1",
     "currentStack": "dotnetcore",
+    "appInsightsName": "[variables('name')]",
     "sqlServerName": "[concat(variables('name'), '-sqlsvr')]",
     "sqlDatabaseName": "[concat(variables('name'), '-sqldb')]",
     "collation": "SQL_Latin1_General_CP1_CI_AS",
@@ -75,7 +76,7 @@
       "location": "[variables('location')]",
       "tags": {},
       "dependsOn": [
-        "microsoft.insights/components/test-test-tailwind",
+        "[concat('microsoft.insights/components/', variables('appInsightsName'))]",
         "[concat('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]",
         "[concat('Microsoft.Sql/servers/', variables('sqlServerName'), '/databases/', variables('sqlDatabaseName'))]",
         "[concat('Microsoft.DocumentDB/databaseAccounts/', variables('cosmosAccountName'))]"
@@ -86,7 +87,7 @@
           "appSettings": [
             {
               "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-              "value": "[reference('microsoft.insights/components/test-test-tailwind', '2015-05-01').InstrumentationKey]"
+              "value": "[reference(concat('microsoft.insights/components/', variables('appInsightsName')), '2015-05-01').InstrumentationKey]"
             },
             {
               "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
@@ -191,7 +192,7 @@
     },
     {
       "apiVersion": "2015-05-01",
-      "name": "test-test-tailwind",
+      "name": "[variables('appInsightsName')]",
       "type": "microsoft.insights/components",
       "location": "[variables('locationCode')]",
       "tags": null,
