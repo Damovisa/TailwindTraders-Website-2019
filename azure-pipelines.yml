@@ -13,8 +13,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  cachekey: npm | $(Agent.OS) | packages.lock.json
-  restorekeys: npm | $(Agent.OS)
+  cachekey: nuget | $(Agent.OS) | Source/Tailwind.Traders.Web/packages.lock.json
+  restorekeys: nuget | $(Agent.OS)
   cachepath: $(Pipeline.Workspace)/.nuget/packages
 
 steps:
