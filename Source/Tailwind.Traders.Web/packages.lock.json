@@ -6,7 +6,7 @@
         "type": "Direct",
         "requested": "[12.1.2, )",
         "resolved": "12.1.2",
-        "contentHash": "AZpm8I3MK4TEQtTy3Nv30EFQFi3MZC4OW0MXZ8PfgGrfWR6Ivvd+DhD1n2qEfgQ2jbxUSKQs2OUBc9Ue//0gBQ==",
+        "contentHash": "SpMsKw74xuAMsYZ+tSQsHF9UYlZm6E+LBSwDPukGCy1dYLVJwM6ZR7gFhKWDMh7OR/1ba8t4UV/RraMJKx+mog==",
         "dependencies": {
           "Microsoft.CSharp": "4.4.0",
           "System.Reflection.TypeExtensions": "4.4.0"
