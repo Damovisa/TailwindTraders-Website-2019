@@ -21,6 +21,7 @@ steps:
 - task: CacheBeta@0
   inputs:
     key: $(cachekey)
+    restoreKeys: $(restorekeys)
     path: $(cachepath)
   displayName: 'Cache Nuget Packages'
 
