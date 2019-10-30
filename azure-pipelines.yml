@@ -13,19 +13,11 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  cachekey: nuget | $(Agent.OS) | Source/Tailwind.Traders.Web/packages.lock.json
-  cachepath: $(Pipeline.Workspace)/.nuget/packages
+  cachekey: nuget | $(Agent.OS) | **/packages.lock.json
+  cachepath: ~/.nuget/packages
 
 steps:
 - task: NuGetToolInstaller@1
-
-  # Restore first, then upload the lock file. So I have the one on the server :|
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
-
-- publish: Source/Tailwind.Traders.Web/packages.lock.json
-  artifact: packagelock
 
 - task: CacheBeta@0
   inputs:
