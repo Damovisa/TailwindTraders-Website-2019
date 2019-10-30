@@ -11,6 +11,7 @@
     <ApplicationInsightsAnnotationResourceId>/subscriptions/27af011d-837c-4a05-aa49-faff31edf79c/resourcegroups/Website/providers/microsoft.insights/components/TailwindTraders</ApplicationInsightsAnnotationResourceId>
     <UserSecretsId>f1b19c9c-b099-4076-ba74-d69af5896061</UserSecretsId>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
 
   <ItemGroup>
