@@ -17,6 +17,7 @@ variables:
   cachepath: $(Pipeline.Workspace)/.nuget/packages
 
 steps:
+- task: NuGetToolInstaller@1
 
   # Restore first, then upload the lock file. So I have the one on the server :|
 - task: NuGetCommand@2
@@ -31,8 +32,6 @@ steps:
     key: $(cachekey)
     path: $(cachepath)
   displayName: 'Cache Nuget Packages'
-
-- task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
   inputs:
