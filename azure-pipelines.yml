@@ -19,6 +19,8 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
+- script: echo $(NUGET_PACKAGES)
+
 - task: CacheBeta@0
   inputs:
     key: $(cachekey)
