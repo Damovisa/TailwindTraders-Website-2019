@@ -17,6 +17,15 @@ variables:
   cachepath: $(Pipeline.Workspace)/.nuget/packages
 
 steps:
+
+  # Restore first, then upload the lock file. So I have the one on the server :|
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- publish: Source/Tailwind.Traders.Web/packages.lock.json
+  artifact: packagelock
+
 - task: CacheBeta@0
   inputs:
     key: $(cachekey)
