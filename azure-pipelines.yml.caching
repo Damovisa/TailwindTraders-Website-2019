@@ -13,19 +13,20 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  cachekey: npm | $(Agent.OS) | packages.lock.json
-  restorekeys: npm | $(Agent.OS)
-  cachepath: $(Pipeline.Workspace)/.nuget/packages
+  restorekey: '"nuget" | "$(Agent.OS)"'
+  cachekey: $(restorekey) | Source/Tailwind.Traders.Web/packages.lock.json
+  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
 
 steps:
+- task: NuGetToolInstaller@1
+
 - task: CacheBeta@0
   inputs:
     key: $(cachekey)
-    restoreKeys: $(restorekeys)
-    path: $(cachepath)
+    path: $(NUGET_PACKAGES)
+    restoreKeys: |
+      $(restorekey)
   displayName: 'Cache Nuget Packages'
-
-- task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
   inputs:
