@@ -24,8 +24,7 @@ steps:
   inputs:
     key: $(cachekey)
     path: $(NUGET_PACKAGES)
-    restoreKeys: |
-      $(restorekey)
+    restoreKeys: $(restorekey)
   displayName: 'Cache Nuget Packages'
 
 - task: NuGetCommand@2
