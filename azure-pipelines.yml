@@ -13,8 +13,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  cachekey: nuget | $(Agent.OS) | **/packages.lock.json
-  cachepath: ~/.nuget/packages
+  cachekey: nuget | $(Agent.OS) | Source/Tailwind.Traders.Web/packages.lock.json
+  cachepath: $(NUGET_PACKAGES)
 
 steps:
 - task: NuGetToolInstaller@1
