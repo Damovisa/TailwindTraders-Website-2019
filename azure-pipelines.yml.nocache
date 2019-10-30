@@ -13,15 +13,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  cachekey: nuget | **/packages.lock.json
-  cachepath: $(Pipeline.Workspace)/.nuget/packages
 
 steps:
-- task: CacheBeta@0
-  inputs:
-    key: $(cachekey)
-    path: $(cachepath)
-  displayName: 'Cache Nuget Packages'
 
 - task: NuGetToolInstaller@1
 
