@@ -13,7 +13,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  cachekey: nuget | **/packages.lock.json
+  cachekey: npm | $(Agent.OS) | packages.lock.json
+  restorekeys: npm | $(Agent.OS)
   cachepath: $(Pipeline.Workspace)/.nuget/packages
 
 steps:
