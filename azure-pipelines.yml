@@ -14,12 +14,10 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   cachekey: nuget | $(Agent.OS) | Source/Tailwind.Traders.Web/packages.lock.json
-  cachepath: $(NUGET_PACKAGES)
+  cachepath: $(Pipeline.Workspace)\.nuget\packages
 
 steps:
 - task: NuGetToolInstaller@1
-
-- script: echo $(NUGET_PACKAGES)
 
 - task: CacheBeta@0
   inputs:
