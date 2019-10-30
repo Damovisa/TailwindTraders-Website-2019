@@ -14,14 +14,12 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   cachekey: nuget | $(Agent.OS) | Source/Tailwind.Traders.Web/packages.lock.json
-  restorekeys: nuget | $(Agent.OS)
   cachepath: $(Pipeline.Workspace)/.nuget/packages
 
 steps:
 - task: CacheBeta@0
   inputs:
     key: $(cachekey)
-    restoreKeys: $(restorekeys)
     path: $(cachepath)
   displayName: 'Cache Nuget Packages'
 
