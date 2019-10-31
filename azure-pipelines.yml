@@ -16,6 +16,7 @@ variables:
   restorekey: '"nuget" | "$(Agent.OS)"'
   cachekey: $(restorekey) | Source/Tailwind.Traders.Web/packages.lock.json
   NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
+  System.Debug: true
 
 steps:
 - task: NuGetToolInstaller@1
