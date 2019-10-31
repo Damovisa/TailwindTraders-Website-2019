@@ -18,7 +18,7 @@ variables:
   nugetcachekey: $(restorekey) | Source/Tailwind.Traders.Web/packages.lock.json
   nugetpackagelocation: $(Pipeline.Workspace)/.nuget/packages
   
-  npmcachekey: npm | $(Agent.OS) | package-lock.json
+  npmcachekey: npm | $(Agent.OS) | Source/Tailwind.Traders.Web/package-lock.json
   npmcachelocation: $(Pipeline.Workspace)/.npm
 
 steps:

@@ -13,18 +13,29 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  restorekey: '"nuget" | "$(Agent.OS)"'
-  cachekey: $(restorekey) | Source/Tailwind.Traders.Web/packages.lock.json
-  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
+
+  nugetrestorekey: '"nuget" | "$(Agent.OS)"'
+  nugetcachekey: $(restorekey) | Source/Tailwind.Traders.Web/packages.lock.json
+  nugetpackagelocation: $(Pipeline.Workspace)/.nuget/packages
+  
+  npmcachekey: npm | $(Agent.OS) | Source/Tailwind.Traders.Web/package-lock.json
+  npmcachelocation: $(Pipeline.Workspace)/.npm
 
 steps:
+
+- task: CacheBeta@0
+  inputs:
+    key: $(npmcachekey)
+    path: $(npmcachelocation)
+  displayName: 'Cache npm packages'
+
 - task: NuGetToolInstaller@1
 
 - task: CacheBeta@0
   inputs:
-    key: $(cachekey)
-    path: $(NUGET_PACKAGES)
-    restoreKeys: $(restorekey)
+    key: $(nugetcachekey)
+    path: $(nugetpackagelocation)
+    restoreKeys: $(nugetrestorekey)
   displayName: 'Cache Nuget Packages'
 
 - task: NuGetCommand@2
