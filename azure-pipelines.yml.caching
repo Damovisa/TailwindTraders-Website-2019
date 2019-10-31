@@ -19,7 +19,7 @@ variables:
   nugetpackagelocation: $(Pipeline.Workspace)/.nuget/packages
   
   npmcachekey: npm | $(Agent.OS) | Source/Tailwind.Traders.Web/package-lock.json
-  npmcachelocation: $(Build.SourcesDirectory)/node_modules
+  npmcachelocation: $(Build.SourcesDirectory)/Source/Tailwind.Traders.Web/ClientApp/node_modules
 
 steps:
 
