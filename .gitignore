@@ -339,3 +339,5 @@ Deploy/helm/__values/*
 .github/workflows/CICD.yml
 .github/workflows/BuildAndDeploy.yml
 .github/BuildAndDeploy.yml
+
+.DS_Store
