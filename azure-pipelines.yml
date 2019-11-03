@@ -14,29 +14,9 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-  nugetrestorekey: '"nuget" | "$(Agent.OS)"'
-  nugetcachekey: $(restorekey) | Source/Tailwind.Traders.Web/packages.lock.json
-  nugetpackagelocation: $(Pipeline.Workspace)/.nuget/packages
-  
-  npmcachekey: npm | $(Agent.OS) | Source/Tailwind.Traders.Web/package-lock.json
-  npmcachelocation: $(Build.SourcesDirectory)/Source/Tailwind.Traders.Web/ClientApp/node_modules
-
 steps:
 
-- task: CacheBeta@0
-  inputs:
-    key: $(npmcachekey)
-    path: $(npmcachelocation)
-  displayName: 'Cache npm packages'
-
 - task: NuGetToolInstaller@1
-
-- task: CacheBeta@0
-  inputs:
-    key: $(nugetcachekey)
-    path: $(nugetpackagelocation)
-    restoreKeys: $(nugetrestorekey)
-  displayName: 'Cache Nuget Packages'
 
 - task: NuGetCommand@2
   inputs:
